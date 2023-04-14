@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+          <div class="row">
+            <div class="card col-lg-3" style="padding-right: 0rem; padding-left: 0rem; margin: 3rem;">
+              <div class="card-body card-titles">
+                <h5 class="card-title">{{cafe.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{cafe.location}}</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Are there toilets? :
+                    {% if cafe.has_toilet == True %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </li>
+                <li class="list-group-item">Wifi? :
+                    {% if cafe.has_wifi == True %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </li>
+                <li class="list-group-item">Are there power plugs? :
+                    {% if cafe.has_sockets == True %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                  {% if cafe.coffee_price == None %}
+                    Coffee price : No Information Available
+                  {% else %}
+                    Coffee price : ${{ cafe.coffee_price }}
+                  {% endif %}
+                </li>
+              </ul>
+              <div class="card-body">
+                <a href="{{ 'https://' + cafe.map_url }}" class="btn btn-primary">Visit the cafe's website</a>
+              </div>
+                {% if current_user.is_authenticated %}
+              <div class="card-body">
+                <a href="{{ url_for('delete_cafe', id=cafe.id) }}" class="btn btn-danger">Delete Cafe</a>
+              </div>
+                {% endif %}
+            </div>
+          </div>
+            {% endblock %}

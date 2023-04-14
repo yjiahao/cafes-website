@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="mx-auto col-10 col-md-8 col-lg-6" style="padding-top: 1.5rem;">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+      <div class="text-center">
+          <div class="bg-warning rounded">
+              <p>
+                {{ messages[0] }} Go to <a class="info-link" href="{{ url_for('login') }}">login page</a>.
+              </p>
+          </div>
+      </div>
+        {% endif %}
+      {% endwith %}
+      <form method="POST" action="{{url_for('register')}}">
+        {{ form.csrf_token }}
+        <div class="form-group">
+          {{ form.email.label }}
+          {{ form.email(class="form-control", placeholder="johncena@gmail.com") }}
+        </div>
+        <div class="form-group">
+          {{ form.password.label }}
+          {{ form.password(class="form-control") }}
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Have a cafe you like?</h1>
+    <h6 style="color: #808080">Fill in this form to display your favourite cafe!</h6>
+</div>
+<div class="row">
+    <img src="https://au.changiairport.com/images/shop-bars-01.jpg" class="img-fluid img-thumbnail mx-auto border border-secondary" style="width: 50%; height:auto;">
+</div>
+<div class="mx-auto col-10 col-md-8 col-lg-6" style="padding-top: 1.5rem;">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+      <div class="text-center">
+          <div class="bg-warning rounded">
+              <p>
+                {{ messages[0] }}
+              </p>
+          </div>
+      </div>
+</div>
+        {% endif %}
+      {% endwith %}
+<div class="row">
+    <div class="mx-auto col-10 col-md-8 col-lg-6" style="padding-top: 1.5rem;">
+        <form method="POST" action="{{url_for('submit')}}">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.name.label }}
+                {{ form.name(class="form-control", placeholder="E.g. NEX") }}
+            </div>
+            <div class="form-group">
+                {{ form.map_url.label }}
+                {{ form.map_url(class="form-control", placeholder="E.g. www.NEX.com") }}
+            </div>
+            <div class="form-group">
+                {{ form.img_url.label }}
+                {{ form.img_url(class="form-control", placeholder="E.g. www.NEX-photos.com") }}
+            </div>
+            <div class="form-group">
+                {{ form.location.label }}
+                {{ form.location(class="form-control", placeholder="Full Address & Postal Code") }}
+            </div>
+            <div class="form-group">
+                {{ form.seats.label }}
+                {{ form.seats(class="form-control", placeholder="E.g. 50") }}
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.has_toilet.label }}
+                    </div>
+                    <div class="col">
+                        {{ form.has_toilet(class="form-control form-checkbox") }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.has_wifi.label }}
+                    </div>
+                    <div class="col">
+                        {{ form.has_wifi(class="form-control form-checkbox") }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.has_sockets.label }}
+                    </div>
+                    <div class="col">
+                        {{ form.has_sockets(class="form-control form-checkbox") }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.can_take_calls.label }}
+                    </div>
+                    <div class="col">
+                        {{ form.can_take_calls(class="form-control form-checkbox") }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.coffee_price.label }}
+                {{ form.coffee_price(class="form-control", placeholder="E.g. 4.50") }}
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+<!--try to beautify this shit, and make it able to record any input i give it-->

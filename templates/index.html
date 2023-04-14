@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mx-auto col-10 col-md-8 col-lg-6" style="padding-top: 1.5rem;">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+      <div class="text-center">
+          <div class="bg-success rounded">
+              <p class="text-light">
+                {{ messages[0] }}
+              </p>
+          </div>
+      </div>
+    {% endif %}
+      {% endwith %}
+</div>
+<div class="text-center pt-3">
+    <h1>Looking for a place to work?</h1>
+    <p> Fret not because our site has every single cafe with wifi listed! Feel free to check them out!</p>
+    <img src="https://st.depositphotos.com/10372250/56414/i/450/depositphotos_564149256-stock-photo-computer-laptop-notebook-coffee-cup.jpg">
+</div>
+{% endblock %}

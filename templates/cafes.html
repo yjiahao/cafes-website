@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="intro-row">
+    <h3>Here's a list of our cafes to check out!</h3>
+<!--    Make this part look more interesting, maybe put like a background with text or something to make it look better-->
+</div>
+<div class="mx-auto col-10 col-md-8 col-lg-6" style="padding-top: 1.5rem;">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+      <div class="text-center">
+          <div class="bg-danger rounded">
+              <p class="text-light">
+                {{ messages[0] }}
+              </p>
+          </div>
+      </div>
+    {% endif %}
+      {% endwith %}
+</div>
+<div class="row">
+            {% for cafe in cafes %}
+            <div class="card col-lg-3" style="padding-right: 0rem; padding-left: 0rem; margin: 3rem;">
+              <div class="card-body card-titles">
+                <h5 class="card-title">{{cafe.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{cafe.location}}</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Are there toilets? :
+                    {% if cafe.has_toilet == True %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </li>
+                <li class="list-group-item">Wifi? :
+                    {% if cafe.has_wifi == True %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </li>
+                <li class="list-group-item">Are there power plugs? :
+                    {% if cafe.has_sockets == True %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </li>
+              </ul>
+              <div class="card-body">
+                <a href="{{ 'https://' + cafe.map_url }}" class="btn btn-primary">Visit the cafe's website</a>
+              </div>
+              <div class="card-body">
+                  <a href="{{ url_for('cafe_info', id=cafe.id) }}" class="btn btn-primary">View more information</a>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+<!--Beutify this shit tmr, fix the bug. I want the freaking thing to show 3 products when large, 1 when small and medium-->
+{% endblock %}
